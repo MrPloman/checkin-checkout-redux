@@ -7,10 +7,15 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from "./services/auth.guard";
 import { dashboardRoutes } from "./dashboard/dashboard.routes";
+import { CheckinGuard } from "./services/checkin.guard";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
+  { path: "login", component: LoginComponent, canActivate: [CheckinGuard] },
+  {
+    path: "register",
+    component: RegisterComponent,
+    canActivate: [CheckinGuard],
+  },
   {
     path: "",
     component: DashboardComponent,

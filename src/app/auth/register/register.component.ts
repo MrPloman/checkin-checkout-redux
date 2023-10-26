@@ -49,15 +49,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.registerForm.value.email,
         this.registerForm.value.password
       )
-      .then((credentials: any) => {
+      .then(() => {
         this.store.dispatch(setLoading({ loading: false }));
-        this.store.dispatch(
-          setUser({
-            email: this.registerForm.value.email,
-            name: this.registerForm.value.name,
-            uid: credentials?.user?.uid,
-          })
-        );
         this.router.navigate(["/"]);
       })
       .catch((err: FirebaseError) => {

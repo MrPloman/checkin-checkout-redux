@@ -9,8 +9,10 @@ export const authReducers = createReducer(
   initialAuthState,
   on(
     setUser,
-    (state, { email, name, uid }) =>
-      (state = { user: new User(name, email, uid) })
+    (state, { user }) =>
+      (state = {
+        user: user,
+      })
   ),
   on(removeUser, (state) => (state = { user: undefined }))
 );

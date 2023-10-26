@@ -17,5 +17,7 @@ export class AppComponent {
     private router: Router,
     private state: Store<AppState>
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.initAuthLister();
+  }
 }

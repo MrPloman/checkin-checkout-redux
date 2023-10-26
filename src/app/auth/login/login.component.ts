@@ -48,15 +48,8 @@ export class LoginComponent implements OnInit {
     this.authService
       .loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then((credentials) => {
-        this.store.dispatch(setLoading({ loading: false }));
-        if (credentials && credentials.user && credentials.user.uid) {
-          this.store.dispatch(
-            setUser({
-              email: credentials.user.email,
-              name: credentials.user.displayName,
-              uid: credentials.user.uid,
-            })
-          );
+        if (credentials) {
+          this.store.dispatch(setLoading({ loading: false }));
           this.router.navigate(["/"]);
         } else {
           Swal.fire({

@@ -26,6 +26,7 @@ import { AuthGuard } from "./services/auth.guard";
 import { StoreModule } from "@ngrx/store";
 import { appReducers } from "./state";
 import { StoreDevtools, StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { CheckinGuard } from "./services/checkin.guard";
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,7 @@ import { StoreDevtools, StoreDevtoolsModule } from "@ngrx/store-devtools";
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, CheckinGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

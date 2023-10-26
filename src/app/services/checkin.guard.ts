@@ -9,17 +9,12 @@ import { AuthService } from "./auth.service";
 import { Observable, tap } from "rxjs";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class CheckinGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.authService.getSessionStatus().pipe(
-      tap((state) => {
-        if (!state) this.router.navigate(["/login"]);
-      })
-    );
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
+    return this.authService.getSessionStatus().subscribe((c) => {
+      if (c) this.router.navigate(["/"]);
+    });
   }
 }
