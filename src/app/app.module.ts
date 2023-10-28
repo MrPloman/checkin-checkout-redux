@@ -27,6 +27,7 @@ import { StoreModule } from "@ngrx/store";
 import { appReducers } from "./state";
 import { StoreDevtools, StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { CheckinGuard } from "./services/checkin.guard";
+import { IncomeOutcomeService } from "./services/income-outcome.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,7 @@ import { CheckinGuard } from "./services/checkin.guard";
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [AuthService, AuthGuard, CheckinGuard],
+  providers: [AuthService, AuthGuard, CheckinGuard, IncomeOutcomeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

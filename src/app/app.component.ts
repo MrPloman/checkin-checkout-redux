@@ -5,6 +5,7 @@ import { AppState } from "./state";
 import { Store } from "@ngrx/store";
 import { setLoading } from "./shared/store/ui.actions";
 import { selectUILoading } from "./shared/store/ui.selector";
+import { IncomeOutcomeService } from "./services/income-outcome.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -13,6 +14,7 @@ import { selectUILoading } from "./shared/store/ui.selector";
 export class AppComponent {
   title = "app";
   constructor(
+    private incomeOutcomeService: IncomeOutcomeService,
     private authService: AuthService,
     private router: Router,
     private state: Store<AppState>

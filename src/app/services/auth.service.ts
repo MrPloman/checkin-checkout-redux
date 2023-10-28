@@ -14,6 +14,7 @@ import { Subscription, map } from "rxjs";
 import { User } from "src/app/models/user.model";
 import { AppState } from "../state";
 import { removeUser, setUser } from "../auth/store/auth.actions";
+import { deleteAllIncomeOutcomeAction } from "../ingreso-egreso/store/income-outcome.actions";
 @Injectable({
   providedIn: "root",
 })
@@ -24,6 +25,13 @@ export class AuthService {
     private angularFirestore: AngularFirestore,
     private store: Store<AppState>
   ) {}
+
+  private userFirebase: User | undefined;
+
+  public get getUser(): User {
+    return { ...this.userFirebase };
+  }
+
   public userSubscription: Subscription;
   public initAuthLister() {
     return this.angularFireAuth.authState.subscribe((firebaseUser) => {
@@ -32,11 +40,16 @@ export class AuthService {
           .doc(`${firebaseUser.uid}/users`)
           .valueChanges()
           .subscribe((fuser: User) => {
+            this.userFirebase = {
+              email: fuser.email,
+              name: fuser.name,
+              uid: firebaseUser.uid,
+            };
             this.store.dispatch(setUser({ user: fuser }));
           });
       } else {
         if (this.userSubscription) this.userSubscription.unsubscribe();
-        this.store.dispatch(removeUser());
+        this.userFirebase = undefined;
       }
     });
   }
