@@ -22,6 +22,8 @@
     "@angular/router": "^16.2.10",
     "@ngrx/store": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
+    "chart.js": "^4.4.0",
+    "ng2-charts": "^5.0.3",
     "rxjs": "~7.8.1",
     "sweetalert2": "^11.7.32",
     "tslib": "^2.6.2"

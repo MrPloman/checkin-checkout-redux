@@ -15,8 +15,10 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let income of incomesOutcomes">
-              <td>{{ income.description }}</td>
+            <tr *ngFor="let income of incomesOutcomes | incomeOutcomePipe">
+              <td>
+                {{ income.description }}
+              </td>
               <td>{{ income.amount }}</td>
               <td>{{ income.income ? "Income" : "Outcome" }}</td>
               <td>

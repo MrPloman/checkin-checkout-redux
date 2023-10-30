@@ -28,6 +28,9 @@ import { appReducers } from "./state";
 import { StoreDevtools, StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { CheckinGuard } from "./services/checkin.guard";
 import { IncomeOutcomeService } from "./services/income-outcome.service";
+import { IncomeOutcomePipe } from "./services/income-outcome.pipe";
+import { NgChartsModule, NgChartsConfiguration } from "ng2-charts";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,7 @@ import { IncomeOutcomeService } from "./services/income-outcome.service";
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    IncomeOutcomePipe,
   ],
   imports: [
     FormsModule,
@@ -58,8 +62,16 @@ import { IncomeOutcomeService } from "./services/income-outcome.service";
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    NgChartsModule,
   ],
-  providers: [AuthService, AuthGuard, CheckinGuard, IncomeOutcomeService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    CheckinGuard,
+    IncomeOutcomeService,
+    IncomeOutcomePipe,
+    { provide: NgChartsConfiguration, useValue: { generateColors: false } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
