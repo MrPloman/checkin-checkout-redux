@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(setLoading({ loading: true }));
     this.authSubscription = this.store
       .select("AuthState")
       .pipe(filter((data) => data.user !== undefined || !!data?.user?.uid))
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               this.store.dispatch(
                 getIncomesOutcomesFromDB({ incomesOutcomes: listPar })
               );
+              this.store.dispatch(setLoading({ loading: false }));
               this.incomeOutcomeSubscription.unsubscribe();
             }
           });
