@@ -11,8 +11,7 @@ import { getAuth, provideAuth } from "@angular/fire/auth";
 import { AuthService } from "./services/auth.service";
 import { provideFirebaseApp, initializeApp } from "@angular/fire/app";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./auth/login/login.component";
-import { RegisterComponent } from "./auth/register/register.component";
+
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { IngresoEgresoComponent } from "./ingreso-egreso/ingreso-egreso.component";
 import { EstadisticaComponent } from "./ingreso-egreso/estadistica/estadistica.component";
@@ -30,25 +29,17 @@ import { CheckinGuard } from "./services/checkin.guard";
 import { IncomeOutcomeService } from "./services/income-outcome.service";
 import { IncomeOutcomePipe } from "./services/income-outcome.pipe";
 import { NgChartsModule, NgChartsConfiguration } from "ng2-charts";
+import { AuthModule } from "./auth/auth.module";
+import { IngresoEgresoModule } from "./ingreso-egreso/ingreso-egreso.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    IngresoEgresoComponent,
-    EstadisticaComponent,
-    DetalleComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    IncomeOutcomePipe,
-  ],
+  declarations: [AppComponent],
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
+    AuthModule,
+    IngresoEgresoModule,
+    SharedModule,
     AppRoutingModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
@@ -62,14 +53,10 @@ import { NgChartsModule, NgChartsConfiguration } from "ng2-charts";
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    NgChartsModule,
   ],
   providers: [
     AuthService,
-    AuthGuard,
-    CheckinGuard,
-    IncomeOutcomeService,
-    IncomeOutcomePipe,
+
     { provide: NgChartsConfiguration, useValue: { generateColors: false } },
   ],
   bootstrap: [AppComponent],

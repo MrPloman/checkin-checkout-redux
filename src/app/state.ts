@@ -16,6 +16,9 @@ export interface AppState {
   AuthState: AuthStateInterface;
   IncomeOutcomeState: IncomeOutcome[];
 }
+export interface AppStateWithIncomeOutcome extends AppState {
+  IncomeOutcome: IncomeOutcome;
+}
 export const appReducers: ActionReducerMap<AppState> = {
   UIState: UIReducers,
   AuthState: authReducers,

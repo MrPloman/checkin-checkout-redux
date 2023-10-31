@@ -4,12 +4,13 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  CanLoad,
 } from "@angular/router";
 import { AuthService } from "./auth.service";
-import { Observable, tap } from "rxjs";
+import { Observable, tap, take } from "rxjs";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -20,6 +21,13 @@ export class AuthGuard implements CanActivate {
       tap((state) => {
         if (!state) this.router.navigate(["/login"]);
       })
+    );
+  }
+  canLoad(): Observable<boolean> {
+    return this.authService.getSessionStatus().pipe(
+      tap((state) => {
+        if (!state) this.router.navigate(["/login"]);
+      }, take(1))
     );
   }
 }
